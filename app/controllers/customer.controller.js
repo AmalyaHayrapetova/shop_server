@@ -79,7 +79,7 @@ exports.findAll = (req, res) => {
 
 
 // Update a Customer firstName by the email in the request
-exports.update = (req, res) => {
+exports.updateFirstName = (req, res) => {
   Customer.update( {FirstName : req.body.FirstName},{
       where:{
         Email: req.body.Email

@@ -14,7 +14,7 @@ module.exports = app => {
 
 
      // Update FirstName
-    router.put("/account/name", customer.update);
+    router.put("/account/name", customer.updateFirstName);
 
     // Retrieve all Customer
     // router.get("/:email", customer.findOne);
