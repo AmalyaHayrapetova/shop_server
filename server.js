@@ -2,9 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./app/models");
-db.sequelize.sync({ force: true }).then(() => {
-    console.log("Drop and re-sync db.");
-  });
   
 const app = express();
 
@@ -26,6 +23,10 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/customer.routes")(app);
+
+db.sequelize.sync({ force: false }).then(() => {
+    console.log("Drop and re-sync db.");
+  });
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;

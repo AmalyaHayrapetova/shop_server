@@ -21,11 +21,9 @@ exports.create = (req, res) => {
         PhoneNumber: req.body.PhoneNumber
       };
 
-      customer.save();
     
       // Save Customers in the database
-      Customer.create(customer)
-      
+      Customer.create(customer)  
         .then(data => {
           res.send(data);
         })
@@ -39,7 +37,7 @@ exports.create = (req, res) => {
 };
 
 // Retrieve the Customer from the database(with email and pass)
-exports.findAll = (req, res) => {
+exports.findOne = (req, res) => {
     Customer.findAll(
         {  imit:1,
             where: {
@@ -51,7 +49,8 @@ exports.findAll = (req, res) => {
    
      .then(data => {
          console.log(data)
-       res.send(data);
+        
+            res.send(data); 
      })
      .catch(err => {
        res.status(500).send({
@@ -61,7 +60,25 @@ exports.findAll = (req, res) => {
 
 };
 
-// Update a Customer by the email in the request
+// Retrieve the Customer from the database(with email and pass)
+exports.findAll = (req, res) => {
+    Customer.findAll()
+        
+     .then(data => {
+         console.log(data)
+        
+            res.send(data); 
+     })
+     .catch(err => {
+       res.status(500).send({
+         message: "Error retrieving Customer with email="
+       });
+     });
+
+};
+
+
+// Update a Customer firstName by the email in the request
 exports.update = (req, res) => {
   Customer.update( {FirstName : req.body.FirstName},{
       where:{
@@ -77,20 +94,4 @@ exports.update = (req, res) => {
     message: "Cannot update FirstName of Customer with email " + req.body.Email
   });
 });
-
-};
-
-// Delete a Customer with the specified id in the request
-exports.delete = (req, res) => {
-  
-};
-
-// Delete all Customer from the database.
-exports.deleteAll = (req, res) => {
-  
-};
-
-// Find all published Customer
-exports.findAllPublished = (req, res) => {
-  
 };
