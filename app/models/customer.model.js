@@ -1,10 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
     const Customer = sequelize.define("Customers", {
-      CustomerID: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-      },
+      // CustomerID: {
+      //   type: Sequelize.INTEGER,
+      //   primaryKey: true,
+      //   autoIncrement: true
+      // },
       Email: {
         type: Sequelize.STRING,
         validate:{
@@ -17,10 +17,9 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         validate:{
           is: /(?=.*[A-Z])(?=.*[a-z])(?=.{8,})(?=.{8,})/i,
-          notEmpty: false
-
         },
         allowNull: false,
+        
       },
       FirstName: {
         type: Sequelize.STRING,
@@ -39,35 +38,6 @@ module.exports = (sequelize, Sequelize) => {
       }
 
       });
-    // Country:{
-    //   type: Sequelize.STRING,
-    //   allowNull: false,
-
-    // },
-    // City:{
-    //   type: Sequelize.STRING,
-    //   allowNull: false,
-
-    // },
-    // Region: {
-    //   type: Sequelize.STRING,
-    //   allowNull: false,
-
-    // },
-
-    // AddressOne: {
-    //   type: Sequelize.STRING,
-    //   allowNull: false,
-    
-    // },
-
-    // ZipCode: {
-    //   type: Sequelize.STRING,
-    //   allowNull: false,
-    // }
-
-    // });
-  
     return Customer;
   };
   
