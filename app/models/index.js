@@ -11,7 +11,11 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     min: dbConfig.pool.min,
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle
-  }
+  },
+  define: {
+    timestamps: false
+}
+
 });
 
 const db = {};
@@ -21,5 +25,5 @@ db.sequelize = sequelize;
 
 db.customer = require("./customer.model.js")(sequelize, Sequelize);
 db.store = require("./store.model.js")(sequelize, Sequelize);
-
+db.shippingAddress = require("./shipping.address.model.js")(sequelize, Sequelize);
 module.exports = db;

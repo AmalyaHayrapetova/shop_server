@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/customer.routes")(app);
+require("./app/routes/store.routes")(app);
 
 db.sequelize.sync({ force: false }).then(() => {
     console.log("Drop and re-sync db.");
