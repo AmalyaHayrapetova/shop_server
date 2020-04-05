@@ -9,6 +9,7 @@ var corsOptions = {
   origin: "http://localhost:8081"
 };
 
+
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
@@ -22,6 +23,7 @@ require("./app/routes/customer.routes")(app);
 require("./app/routes/store.routes")(app);
 require("./app/routes/shipping.address.routes")(app);
 require("./app/routes/product.category.routes")(app);
+require("./app/routes/product.sub.category.routes")(app);
 
 db.sequelize.sync({ force: false }).then(() => {
     console.log("Drop and re-sync db.");

@@ -11,7 +11,7 @@ module.exports = app => {
 
     
 
-    app.use('/category', router);
+    app.use('/product/category', router);
 
 
 }

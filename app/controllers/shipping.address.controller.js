@@ -1,5 +1,4 @@
 const services = require("../services/shipping.address")
-const customerUtils = require("../utils/customer.utils")
 
 
 // Create a new Shipping Address
