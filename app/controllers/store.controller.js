@@ -1,4 +1,6 @@
 const services = require("../services/store")
+const storeUtils = require("../utils/store.utils")
+
 
 // Create  a new Store
 exports.createStore = async (req, res) => {
@@ -17,16 +19,21 @@ exports.findAllStores = async (req, res) => {
 // Update store info
 exports.updateStoreInfo = async (req, res) => {
     const result = await services.update(req.body);
+    //fixme add if storeName is wrong or no exist
     res.json(result);
 };
 
 
 //find store by name
 exports.getStore = async (req, res) => {
-    console.log("Query is",req)
-    console.log("Query is",req.query.id)
-    const result = await services.findOne(req.query.id);
-    res.json(result);
+    const result = await services.findStoreInfo(req.params.id);
+        // console.log("No store with that name is found")
+        // res.send("No store with that name is found")
+        res.json(result)
+    
+    // else {
+    //    res.json(result);
+    // }
 };
 
 

@@ -35,3 +35,12 @@ exports.findAll = async (customers) => {
       })
    };
   
+   exports.findCustomerById = async(customer) => {
+     return Customer.findAll({
+       where : {
+         id : customer.id
+       },
+       plain: true,
+      }
+     )}
+   

@@ -3,8 +3,8 @@ module.exports = (sequelize, Sequelize) => {
     const Store = sequelize.define("Stores", {
       StoreName: {
         type: Sequelize.STRING(80),
-        unique: true,
         allowNull: false,
+        primaryKey: true,
       },
       StoreLogoPath: {
         type: Sequelize.STRING(120),
@@ -30,6 +30,7 @@ module.exports = (sequelize, Sequelize) => {
       PhoneNumber: {
         type: Sequelize.STRING(120),
         allowNull: false,
+        primaryKey: true
       } 
     });
    

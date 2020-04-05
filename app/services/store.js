@@ -12,24 +12,23 @@ exports.findAll = async(store) => {
     return Store.findAll(store);
 }
 
-//fixme
-exports.findOne = async(store) => {
+exports.findStoreInfo = async(name) => {
     return Store.findAll(
         { 
-            limit : 1,
-            where: { StoreName:store.id
+            where: { StoreName:name
         },
-        // attributes:[store.StoreName]
      });
 }
 
 exports.update = async (store) => {
-    return Store.update( {StoreLogoPath : store.StoreLogoPath, Description : store.Descriptionin,
+    return Store.update({StoreLogoPath : store.StoreLogoPath, Description : store.Description,
         PhoneNumber: store.PhoneNumber},
       {
           where:{
-            StoreName : store.StoreName
-          }
+            StoreName : store.StoreName,
+            PhoneNumber: store.PhoneNumber
+          },
+          plain: true        
         })
      };
     
