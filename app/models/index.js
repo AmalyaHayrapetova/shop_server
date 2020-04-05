@@ -27,5 +27,8 @@ db.customer = require("./customer.model.js")(sequelize, Sequelize);
 db.store = require("./store.model.js")(sequelize, Sequelize);
 db.shippingAddress = require("./shipping.address.model.js")(sequelize, Sequelize);
 db.productCategory = require("./product.category.model")(sequelize,Sequelize);
+db.productSubCategory = require("./product.sub.category.model")(sequelize,Sequelize);
+
+
 
 module.exports = db;

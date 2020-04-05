@@ -4,7 +4,8 @@ module.exports = (sequelize, Sequelize) => {
    CategoryName: {
      type: Sequelize.STRING(120),
      allowNull: false,
-     unique: true
+     unique: true,
+     primaryKey : true,
    },
    });
 
