@@ -18,13 +18,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to online shopping in Armenia application." });
-});
-
 require("./app/routes/customer.routes")(app);
 require("./app/routes/store.routes")(app);
 require("./app/routes/shipping.address.routes")(app);
+require("./app/routes/product.category.routes")(app);
 
 db.sequelize.sync({ force: false }).then(() => {
     console.log("Drop and re-sync db.");
