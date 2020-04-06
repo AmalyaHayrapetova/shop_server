@@ -4,7 +4,7 @@ const services = require("../services/product.sub.category")
 //create product sub category
 exports.createProductSubCategory = async(req,res) => {
     const result = await services.create(req.body)
-    res.json(result)
+     res.json(result)
 }
 
 //get all categories

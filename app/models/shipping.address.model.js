@@ -29,7 +29,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       ZipCode: {
         type: Sequelize.STRING(80),
-        primaryKey: true,
       },
       PhoneNumber: {
         type: Sequelize.STRING(120),

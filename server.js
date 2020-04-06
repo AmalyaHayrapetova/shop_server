@@ -24,6 +24,7 @@ require("./app/routes/store.routes")(app);
 require("./app/routes/shipping.address.routes")(app);
 require("./app/routes/product.category.routes")(app);
 require("./app/routes/product.sub.category.routes")(app);
+require("./app/routes/order.status.routes")(app);
 
 db.sequelize.sync({ force: false }).then(() => {
     console.log("Drop and re-sync db.");
