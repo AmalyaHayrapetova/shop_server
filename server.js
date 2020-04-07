@@ -27,6 +27,7 @@ require("./app/routes/product.sub.category.routes")(app);
 require("./app/routes/order.status.routes")(app);
 require("./app/routes/products.routes")(app);
 require("./app/routes/color.routes")(app);
+require("./app/routes/product.color.routes")(app);
 
 
 db.sequelize.sync({ force: false }).then(() => {

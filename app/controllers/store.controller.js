@@ -37,7 +37,6 @@ exports.getStore = async (req, res) => {
 
 
 exports.findStoreID = async (req) => {
-    console.log("Result is: ", req)
     const result = await services.findStore(req);
     return result[0].id;
 };

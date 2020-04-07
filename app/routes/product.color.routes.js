@@ -1,5 +1,5 @@
 module.exports = app => {
-    const productColor = require("../controllers/color.controller");
+    const productColor = require("../controllers/products.color.controller.js");
 
     const options = {
         dotfiles: 'ignore',
@@ -15,13 +15,10 @@ module.exports = app => {
       
     var router = require("express").Router(options);
   
-     // Find all statuses
-    router.get("/", productColor.findAllAvailableColors);
+     // get all     
+    router.get("/", productColor.findProductsColors);
 
-    // Create a new order status
-    router.post("/new", productColor.createColor);
-    
-    app.use('/product/color', router);
+    app.use('/product/product-color', router);
 
 
 }

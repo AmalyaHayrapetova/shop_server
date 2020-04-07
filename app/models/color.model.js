@@ -1,8 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
     const Color = sequelize.define("Colors", {
 
-        ColorName: {
+        Color: {
             type: Sequelize.STRING(90),
+            allowNull : false,
         }
 
     })

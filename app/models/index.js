@@ -31,7 +31,8 @@ db.productCategory = require("./product.category.model")(sequelize,Sequelize,Dat
 db.productSubCategory = require("./product.sub.category.model")(sequelize,Sequelize,DataTypes);
 db.orderStatus = require("./order.status.model")(sequelize,Sequelize,DataTypes);
 db.products = require("./products.model")(sequelize,Sequelize,DataTypes);
-db.productColor = require("./color.model")(sequelize,Sequelize,DataTypes);
+db.color = require("./color.model")(sequelize,Sequelize,DataTypes);
+db.productColor = require("./product.color.model")(sequelize,Sequelize,DataTypes);
 
 
 
