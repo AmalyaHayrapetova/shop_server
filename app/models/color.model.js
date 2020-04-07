@@ -1,11 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
-    const ProductColor = sequelize.define("Colors", {
+    const Color = sequelize.define("Colors", {
 
         ColorName: {
             type: Sequelize.STRING(90),
         }
 
     })
-    return ProductColor;
+    return Color;
 
 }
