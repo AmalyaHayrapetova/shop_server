@@ -24,6 +24,7 @@ module.exports = app => {
     //remove shipping address
     router.post("/remove",shippingAddress.removeShippingAddress)
 
+    //fixme add update shippin address
 
     app.use('/shippingaddress', router);
 

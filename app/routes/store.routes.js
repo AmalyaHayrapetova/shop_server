@@ -15,18 +15,18 @@ module.exports = app => {
       
     var router = require("express").Router(options);
   
-     // Find all customers
+     // Find all stores
     router.get("/", store.findAllStores);
 
-    // Create a new Customer
+    // Create a new store
     router.post("/new", store.createStore);
 
     //update store info 
     router.post("/info", store.updateStoreInfo);
 
      // Find the store
-     router.get("/:id", store.getStore);
-
+     
+    router.get("/:id", store.getStore);
 
 
     app.use('/store', router);

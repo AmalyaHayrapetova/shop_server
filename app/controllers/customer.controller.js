@@ -27,8 +27,7 @@ exports.findAllCustomers = async (req,res) => {
 // Update a Customer firstName and lastName by the email in the request
 exports.updateCustomerInfo = async (req, res) => {
   const result = await services.update(req.body);
-  if(result[0] == 1)
-  return res.json(req.body); 
+  return res.json(result); 
 
 };
 

@@ -4,7 +4,6 @@ const services = require("../services/store")
 // Create  a new Store
 exports.createStore = async (req, res) => {
     const result = await services.create(req.body);    
-    console.log("The result is: ", result);
     res.json(result);
 };
 
@@ -37,3 +36,8 @@ exports.getStore = async (req, res) => {
 
 
 
+exports.findStoreID = async (req) => {
+    console.log("Result is: ", req)
+    const result = await services.findStore(req);
+    return result[0].id;
+};

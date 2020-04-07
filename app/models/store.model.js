@@ -4,7 +4,6 @@ module.exports = (sequelize, Sequelize) => {
       StoreName: {
         type: Sequelize.STRING(80),
         allowNull: false,
-        primaryKey: true,
       },
       StoreLogoPath: {
         type: Sequelize.STRING(120),
@@ -30,7 +29,6 @@ module.exports = (sequelize, Sequelize) => {
       PhoneNumber: {
         type: Sequelize.STRING(120),
         allowNull: false,
-        primaryKey: true
       } 
     });
    
