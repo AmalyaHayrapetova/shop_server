@@ -3,28 +3,48 @@ const Products = db.products
 const Stores = require("../controllers/store.controller")
 const Color = require("../controllers/color.controller")
 const ProductsColor = require("../controllers/products.color.controller")
-
+const ProductImages  = require("../controllers/product.images.controller")
 
 
 exports.create = async (products) =>{
 
     var storeID = await Stores.findStoreID(products.StoreName)
-    var color = await Color.checkAvailableColor(products.Color)
     products["StoreID"] = storeID;
     var result =  await Products.create(products);
-    var colorBody = {"Color" : products.Color};
+
+    for ( index in products.Attributes) {
+        var colorType = products.Attributes[index].Color;
+
+        var isColorAvailable = await Color.checkAvailableColor(colorType)
+        var colorBody = { 'Color' : colorType}
+
+        if(isColorAvailable === 0){
+            await Color.createColorWithName(colorBody)
+        }
+        var colorID = await Color.findColorById(colorType);
+        await ProductsColor.createColor(colorID,result.id)
     
-    if(color === 0){
-        await Color.createColorWithName(colorBody)
+        for( image_index in products.Attributes[index].ImagePath){
+            var images = products.Attributes[index].ImagePath[image_index]
+            await ProductImages.createProductImages(images,result.id,colorType)
+        }
+
+
     }
-    var colorID = await Color.findColorById(products.Color);
-    await ProductsColor.createColor(colorID,result.id)
 
     return result;
 }
 
 exports.findAll = async (products) =>{
     return Products.findAll(products);
+}
+
+exports.findProductID = async(productName) => {
+    const productID = await sequelize.query("SELECT `id` FROM `Products` WHERE ProductName =:ProductName",{
+        replacements: { ProductName: productName },
+         type: QueryTypes.SELECT 
+        });
+        return productID;
 }
 
 

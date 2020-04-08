@@ -33,7 +33,7 @@ db.orderStatus = require("./order.status.model")(sequelize,Sequelize,DataTypes);
 db.products = require("./products.model")(sequelize,Sequelize,DataTypes);
 db.color = require("./color.model")(sequelize,Sequelize,DataTypes);
 db.productColor = require("./product.color.model")(sequelize,Sequelize,DataTypes);
-
+db.productImages = require("./product.images.model")(sequelize,Sequelize,DataTypes);
 
 
 module.exports = db;
