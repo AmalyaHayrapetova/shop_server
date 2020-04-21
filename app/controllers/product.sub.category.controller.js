@@ -1,15 +1,18 @@
-const services = require("../services/product.sub.category")
-
+const services = require("../services/product.sub.category");
 
 //create product sub category
-exports.createProductSubCategory = async(req,res) => {
-    const result = await services.create(req.body)
-     res.json(result)
-}
+exports.createProductSubCategory = async (req, res) => {
+  const result = await services.create(req.body);
+  res.json(result);
+};
 
 //get all categories
-exports.findAllProductSubCategories = async(req, res) => {
-    const result = await services.findAll(req.body)
-    res.json(result)
+exports.findAllProductSubCategories = async (req, res) => {
+  const result = await services.findAll(req.body);
+  res.json(result);
+};
 
-}
+module.exports.findCategoryBySubCategory = async (subCategoryName) => {
+  const result = await services.findCategoryName(subCategoryName);
+  return result;
+};

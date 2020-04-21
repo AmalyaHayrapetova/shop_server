@@ -1,15 +1,13 @@
-module.exports = app => {
-    const productSubCategory = require("../controllers/product.sub.category.controller");
+module.exports = (app) => {
+  const productSubCategory = require("../controllers/product.sub.category.controller");
 
-    var router = require("express").Router();
-  
-     // Find all categories
-    router.get("/all", productSubCategory.findAllProductSubCategories);
+  var router = require("express").Router();
 
-    // Create a new category
-    router.post("/type", productSubCategory.createProductSubCategory);
+  // Find all categories
+  router.get("/all", productSubCategory.findAllProductSubCategories);
 
-    app.use('/product/category', router);
+  // Create a new category
+  router.post("/type", productSubCategory.createProductSubCategory);
 
-
-}
+  app.use("/product/category", router);
+};

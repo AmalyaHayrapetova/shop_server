@@ -1,11 +1,10 @@
-const services = require("../services/product.images")
-
+const services = require("../services/product.images");
 
 //create product category
-exports.createProductImages = async(imagePath,productID,productColor) => {
-    const result = await services.create(productID,imagePath,productColor)
-    return result;
-}
+exports.createProductImages = async (imagePath, productId, color) => {
+  const result = await services.create(imagePath, productId, color);
+  return result;
+};
 
 //get all categories
 
