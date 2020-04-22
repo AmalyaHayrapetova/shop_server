@@ -64,3 +64,4 @@ exports.findMenProducts = async (req, res) => {
       res.json(result)
   }
 
+  
