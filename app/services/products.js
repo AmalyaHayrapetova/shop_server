@@ -33,7 +33,7 @@ exports.findAll = async (products) => {
 
 exports.findProductID = async (productName) => {
   const productID = await sequelize.query(
-    "SELECT `id` SELECT `Products` WHERE ProductName =:ProductName",
+    "SELECT `id` FROM `Products` WHERE ProductName =:ProductName",
     {
       replacements: { ProductName: productName },
       type: QueryTypes.SELECT,
