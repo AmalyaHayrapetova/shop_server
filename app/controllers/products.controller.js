@@ -1,4 +1,6 @@
 const services = require("../services/products");
+const url = require('url');
+
 
 // Create a new product_color
 exports.addProductWithColor = async (req, res) => {
@@ -17,3 +19,48 @@ exports.findProductIDByName = async (req) => {
   const result = await services.findProductID(req);
   return result[0].id;
 };
+
+exports.findAllProductByCurrentType = async (req, res) => {
+  const result = await services.findProductsOfCategory(req.params.id);
+  res.json(result);
+};
+
+exports.findWomenProducts = async (req, res) => {
+  const result = await services.findProductsOfSubCategory(
+    req.params.id,
+    "Women"
+  );
+  res.json(result);
+};
+
+exports.findMenProducts = async (req, res) => {
+    const result = await services.findProductsOfSubCategory(
+      req.params.id,
+      "Men"
+    );
+    res.json(result);
+  };
+  
+  exports.findBoysProducts = async (req, res) => {
+    const result = await services.findProductsOfSubCategory(
+      req.params.id,
+      "Boy"
+    );
+    res.json(result);
+  };
+
+  exports.findGirlsProducts = async (req, res) => {
+    const result = await services.findProductsOfSubCategory(
+      req.params.id,
+      "Girl"
+    );
+    res.json(result);
+  };
+
+  exports.filtrByGenderSubCategoryStore = async(req,res) => {
+      const result = await services.findProductsByStoreNameFromSubCategory(
+        req.query.category, req.query.gender, req.query.storename
+      );
+      res.json(result)
+  }
+

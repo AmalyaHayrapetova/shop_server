@@ -23,5 +23,24 @@ module.exports = (app) => {
   //find all products
   router.get("/", products.findAll);
 
+  //find products of clothings or shoes or accessorizes
+  router.get("/category/:id", products.findAllProductByCurrentType);
+
+  //find products of sub category clothings or shoes or accessorizes
+  router.get("/women/:id", products.findWomenProducts);
+
+  //find products of sub category clothings or shoes or accessorizes
+  router.get("/men/:id", products.findMenProducts);
+
+  //find products of sub category clothings or shoes or accessorizes
+  router.get("/boys/:id", products.findBoysProducts);
+
+  //find products of sub category clothings or shoes or accessorizes
+  router.get("/girls/:id", products.findGirlsProducts);
+
+  //find products of gender(women,men etc), sub category and storeName
+  router.get("/find", products.filtrByGenderSubCategoryStore);
+
+
   app.use("/product", router);
 };

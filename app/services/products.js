@@ -1,4 +1,5 @@
 const db = require("../models");
+const { QueryTypes } = require("sequelize");
 const Products = db.products;
 const Stores = require("../controllers/store.controller");
 const Color = require("../controllers/color.controller");
@@ -24,7 +25,6 @@ exports.create = async (products) => {
   await addProductMaterials(products.MaterialType, product.id);
 
   return product;
-
 };
 
 exports.findAll = async (products) => {
@@ -33,7 +33,7 @@ exports.findAll = async (products) => {
 
 exports.findProductID = async (productName) => {
   const productID = await sequelize.query(
-    "SELECT `id` FROM `Products` WHERE ProductName =:ProductName",
+    "SELECT `id` SELECT `Products` WHERE ProductName =:ProductName",
     {
       replacements: { ProductName: productName },
       type: QueryTypes.SELECT,
@@ -41,6 +41,58 @@ exports.findProductID = async (productName) => {
   );
   return productID;
 };
+
+exports.findProductsOfCategory = async (productCategoryName) => {
+  const products = await sequelize.query(
+    "SELECT `ProductName` FROM `Products` `p` LEFT JOIN " +
+      "`ProductSubCategoryTypes` `cat` ON p.ProductSubCategoryName=cat.SubCategoryName WHERE cat.CategoryName =:CategoryName",
+    {
+      replacements: { CategoryName: productCategoryName },
+      type: QueryTypes.SELECT,
+    }
+  );
+  return products;
+};
+
+exports.findProductsOfSubCategory = async (productSubCategoryName,genderType) => {
+
+  const products = await sequelize.query(
+    "Select * From Products  p LEFT JOIN ProductGenderTypes  genderTypes ON genderTypes.GenderID" +
+      " =(SELECT id from Genders WHERE GenderType =:GenderType) " +
+      "WHERE p.id = genderTypes.ProductID AND p.ProductSubCategoryName =:ProductSubCategoryName",
+    {
+      replacements: {
+        ProductSubCategoryName: productSubCategoryName,
+        GenderType: genderType,
+      },
+      type: QueryTypes.SELECT,
+    }
+  );
+  return products;
+};
+
+
+exports.findProductsByStoreNameFromSubCategory = async (productSubCategoryName,genderType,storeName) => {
+    const products = await sequelize.query(
+        "Select * From Products p LEFT JOIN ProductGenderTypes  genderTypes ON genderTypes.GenderID" +
+          " =(SELECT id from Genders WHERE GenderType =:GenderType) " +
+          "WHERE p.id = genderTypes.ProductID AND p.ProductSubCategoryName =:ProductSubCategoryName and p.StoreID =(SELECT id from Stores where StoreName =:StoreName)",
+        {
+          replacements: {
+            ProductSubCategoryName: productSubCategoryName,
+            GenderType: genderType,
+            StoreName:storeName
+          },
+          type: QueryTypes.SELECT,
+        }
+      );
+      return products;
+      };
+  
+  
+
+
+
 
 const findProductType = async (categoryName) => {
   const result = await ProductSubCategory.findCategoryBySubCategory(
@@ -93,19 +145,20 @@ const addProductAttributes = async (attributes, productID) => {
   }
 };
 
-// exports.update = async (products) => {
-//     return Products.update({
-//         Description : products.Description,
-//         Description : store.Description,
-//         PhoneNumber: store.PhoneNumber
+//fixme
+exports.update = async (products) => {
+    return Products.update({
+        Description : products.Description,
+        Description : store.Description,
+     
 
-//     },
-//       {
-//           where:{
-//             StoreName : store.StoreName,
-//             PhoneNumber: store.PhoneNumber
-//           },
-//           plain: true
-//         })
+    },
+      {
+          where:{
+            ProductName : products.productName
+            
+          },
+          plain: true
+        })
 
-// }
+}

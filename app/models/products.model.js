@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     ProductName: {
       type: DataTypes.STRING(250),
       allowNull: false,
+      primaryKey:true,
     },
     Description: {
       type: DataTypes.STRING(250),
