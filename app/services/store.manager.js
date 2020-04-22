@@ -6,7 +6,6 @@ exports.create = async (manager) => {
   // Save Customers in the database
   var storeID = await Stores.findStoreID(manager.StoreName);
   manager["StoreID"] = storeID;
-  console.log("Manager is|; ", manager)
   var managers = await Manager.create(manager);
 
   return managers;
