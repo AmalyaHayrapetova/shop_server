@@ -37,6 +37,7 @@ require("./app/routes/product.clothing.size.routes")(app);
 require("./app/routes/shoes.size.routes")(app);
 require("./app/routes/product.shoes.size.routes")(app);
 require("./app/routes/gender.routes")(app);
+require("./app/routes/store.manager.routes")(app);
 
 
 db.sequelize.sync({ force: false }).then(() => {

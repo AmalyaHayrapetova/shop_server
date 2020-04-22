@@ -84,5 +84,9 @@ db.productShoesSize = require("./product.shoes.size.model")(
   DataTypes
 );
 db.gender = require("./gender.model")(sequelize, Sequelize, DataTypes);
-
+db.storeManager = require("./store.manager.model")(
+  sequelize,
+  Sequelize,
+  DataTypes
+);
 module.exports = db;
