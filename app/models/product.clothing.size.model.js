@@ -8,20 +8,22 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING(90),
       references: Size,
       referencesKey: "SizeType",
-      allowNull: false,
       primaryKey: true,
     },
     ProductID: {
       type: Sequelize.INTEGER,
       references: Products,
       referencesKey: "id",
-      allowNull: false,
       primaryKey: true,
     },
     AvailableCount: {
-      type: Sequelize.STRING(30),
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
+    Colors:{
+      type: Sequelize.STRING(90),
+      primaryKey: true,
+    }
   });
 
   return ClothingSize;

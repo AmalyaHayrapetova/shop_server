@@ -2,11 +2,13 @@ const db = require("../models");
 const ProductClothingSize = db.productClothingSize;
 sequelize = db.sequelize;
 
-exports.create = async (sizeType, productID, availableCount) => {
+exports.createClothingSize = async (sizeType, productID, availableCount,color,) => {
   return ProductClothingSize.create({
     SizeType: sizeType,
     ProductID: productID,
     AvailableCount: availableCount,
+    Colors:color,
+
   });
 };
 

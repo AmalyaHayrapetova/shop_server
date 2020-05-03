@@ -1,10 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
   const Customer = sequelize.define("Customers", {
-    // CustomerID: {
-    //   type: Sequelize.INTEGER,
-    //   primaryKey: true,
-    //   autoIncrement: true
-    // },
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     Email: {
       type: Sequelize.STRING,
       validate: {

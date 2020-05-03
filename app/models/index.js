@@ -89,4 +89,11 @@ db.storeManager = require("./store.manager.model")(
   Sequelize,
   DataTypes
 );
+db.orderDetails = require("./order.details.model")(
+  sequelize,
+  Sequelize,
+  DataTypes
+);
+
+db.orders = require("./orders.model")
 module.exports = db;

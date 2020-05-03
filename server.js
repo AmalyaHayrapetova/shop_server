@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./app/models");
 const asyncHandler = require('express-async-handler')
+const { handleError } = require("./app/errors/error")
 
 const app = express();
 
@@ -47,6 +48,13 @@ db.sequelize.sync({ force: false }).then(() => {
   //error handler
   app.use(asyncHandler);
 
+  app.use(( req, res, next) => {
+    const error = handleError(req, res,next);
+    error.status = 404;
+    next(error);
+  
+  });
+  
 // set port, listen for requests
 const PORT = 3000;
 app.listen(PORT, () => {

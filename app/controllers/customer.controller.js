@@ -7,8 +7,8 @@ exports.create = async (req, res) => {
 };
 
 // Retrieve the Customer from the database(with email and pass)
-exports.findCustomer = async (req, res) => {
-  const result = await services.findCustomer(req.body);
+exports.findCustomer = async (req, res,next) => {
+  const result = await services.findCustomer(req.body,next);
   res.json(result);
 };
 

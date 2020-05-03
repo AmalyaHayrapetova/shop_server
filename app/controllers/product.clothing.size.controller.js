@@ -1,8 +1,8 @@
 const services = require("../services/product.clothing.size");
 
 //create product clothing size
-exports.createSize = async (size, product, count) => {
-  const result = await services.create(size, product, count);
+exports.createSize = async (size, product, count,color,) => {
+  const result = await services.createClothingSize(size, product,count, color);
   return result;
 };
 

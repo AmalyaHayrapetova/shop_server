@@ -18,7 +18,6 @@ exports.create = async (products) => {
   var categoryName = await findProductType(products.ProductSubCategoryName);
   products["StoreID"] = storeID;
   var product = await Products.create(products);
-
   await ProductGender.createProductGender(genderID, product.id);
   await createSizes(categoryName[0].CategoryName, products.Sizes, product.id);
   await addProductAttributes(products.Attributes, product.id);
@@ -54,8 +53,10 @@ exports.findProductsOfCategory = async (productCategoryName) => {
   return products;
 };
 
-exports.findProductsOfSubCategory = async (productSubCategoryName,genderType) => {
-
+exports.findProductsOfSubCategory = async (
+  productSubCategoryName,
+  genderType
+) => {
   const products = await sequelize.query(
     "Select * From Products  p LEFT JOIN ProductGenderTypes  genderTypes ON genderTypes.GenderID" +
       " =(SELECT id from Genders WHERE GenderType =:GenderType) " +
@@ -71,28 +72,26 @@ exports.findProductsOfSubCategory = async (productSubCategoryName,genderType) =>
   return products;
 };
 
-
-exports.findProductsByStoreNameFromSubCategory = async (productSubCategoryName,genderType,storeName) => {
-    const products = await sequelize.query(
-        "Select * From Products p LEFT JOIN ProductGenderTypes  genderTypes ON genderTypes.GenderID" +
-          " =(SELECT id from Genders WHERE GenderType =:GenderType) " +
-          "WHERE p.id = genderTypes.ProductID AND p.ProductSubCategoryName =:ProductSubCategoryName and p.StoreID =(SELECT id from Stores where StoreName =:StoreName)",
-        {
-          replacements: {
-            ProductSubCategoryName: productSubCategoryName,
-            GenderType: genderType,
-            StoreName:storeName
-          },
-          type: QueryTypes.SELECT,
-        }
-      );
-      return products;
-      };
-  
-  
-
-
-
+exports.findProductsByStoreNameFromSubCategory = async (
+  productSubCategoryName,
+  genderType,
+  storeName
+) => {
+  const products = await sequelize.query(
+    "Select * From Products p LEFT JOIN ProductGenderTypes  genderTypes ON genderTypes.GenderID" +
+      " =(SELECT id from Genders WHERE GenderType =:GenderType) " +
+      "WHERE p.id = genderTypes.ProductID AND p.ProductSubCategoryName =:ProductSubCategoryName and p.StoreID =(SELECT id from Stores where StoreName =:StoreName)",
+    {
+      replacements: {
+        ProductSubCategoryName: productSubCategoryName,
+        GenderType: genderType,
+        StoreName: storeName,
+      },
+      type: QueryTypes.SELECT,
+    }
+  );
+  return products;
+};
 
 const findProductType = async (categoryName) => {
   const result = await ProductSubCategory.findCategoryBySubCategory(
@@ -114,8 +113,15 @@ const createSizes = async (categoryName, productSize, productID) => {
   if (categoryName === "Clothing") {
     for (index in productSize) {
       var size = productSize[index].Size;
-      var count = productSize[index].Count;
-      await ProductClothingSize.createSize(size, productID, count);
+      var colors = productSize[0].AvailableColors;
+      for (i in colors) {
+        await ProductClothingSize.createSize(
+          size,
+          productID,
+          colors[i].Count,
+          colors[i].Color
+        );
+      }
     }
   } else if (categoryName === "Shoes") {
     for (index in productSize) {
@@ -147,18 +153,16 @@ const addProductAttributes = async (attributes, productID) => {
 
 //fixme
 exports.update = async (products) => {
-    return Products.update({
-        Description : products.Description,
-        Description : store.Description,
-     
-
+  return Products.update(
+    {
+      Description: products.Description,
+      Description: store.Description,
     },
-      {
-          where:{
-            ProductName : products.productName
-            
-          },
-          plain: true
-        })
-
-}
+    {
+      where: {
+        ProductName: products.productName,
+      },
+      plain: true,
+    }
+  );
+};
