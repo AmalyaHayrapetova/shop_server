@@ -23,3 +23,8 @@ exports.updateCustomerInfo = async (req, res) => {
   const result = await services.update(req.body);
   return res.json(result);
 };
+
+exports.checkCustomer = async(req, res) => {
+  const result = await services.findCustomerByEmailAndPass(req.body);
+  return res.json(result);
+}

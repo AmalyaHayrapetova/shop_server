@@ -56,12 +56,21 @@ exports.findMenProducts = async (req, res) => {
     );
     res.json(result);
   };
-
-  exports.filtrByGenderSubCategoryStore = async(req,res) => {
-      const result = await services.findProductsByStoreNameFromSubCategory(
-        req.query.category, req.query.gender, req.query.storename
+  exports.filtrByGenderSubCategory = async(req,res) => {
+      const result = await services.findProductsByGenderAndSubCategory(
+        req.query.subcategory, req.query.gender
       );
       res.json(result)
   }
 
   
+exports.findProductWithId = async(req,res) => {
+  const result = await services.findProductById(req.params.id);
+  res.json(result);
+}
+
+exports.filtrByGender = async(req,res) => {
+  const result = await services.findProductByGender(req.params.id);
+  res.json(result);
+
+}

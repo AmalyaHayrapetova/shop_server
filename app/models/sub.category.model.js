@@ -1,8 +1,8 @@
 const db = require("../models");
-const ProductCategoryTypes = db.productCategory;
+const CategoryTypes = db.category;
 
 module.exports = (sequelize, Sequelize) => {
-  const SubCategory = sequelize.define("ProductSubCategoryTypes", {
+  const SubCategory = sequelize.define("SubCategoryTypes", {
     SubCategoryName: {
       type: Sequelize.STRING(120),
       allowNull: false,
@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     CategoryName: {
       type: Sequelize.STRING(120),
-      references: ProductCategoryTypes,
+      references: CategoryTypes,
       referencesKey: "CategoryName",
       allowNull: false,
     },

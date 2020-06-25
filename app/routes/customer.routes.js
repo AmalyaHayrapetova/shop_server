@@ -7,13 +7,15 @@ module.exports = (app) => {
   router.get("/", customer.findAllCustomers);
 
   // Create a new Customer
-  router.post("/signup", customer.create);
+  router.post("/sign-up", customer.create);
 
   // LogIn as a Customer
-  router.get("/signin", customer.findCustomer);
+  router.get("/sign-in", customer.findCustomer);
 
   // Update FirstName
   router.put("/account/info", customer.updateCustomerInfo);
+
+  router.get("/auth", customer.checkCustomer);
 
   app.use("/customer", router);
 };

@@ -1,4 +1,4 @@
-const services = require("../services/product.category");
+const services = require("../services/category");
 
 //create product category
 exports.createProductCategory = async (req, res) => {

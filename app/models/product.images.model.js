@@ -4,7 +4,7 @@ const Products = db.products;
 module.exports = (sequelize, Sequelize) => {
   const ProductImages = sequelize.define("ProductImages", {
     ImagePath: {
-      type: Sequelize.STRING(120),
+      type: Sequelize.STRING(500),
       primaryKey: true,
     },
     ProductColor: {

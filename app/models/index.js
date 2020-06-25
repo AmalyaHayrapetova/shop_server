@@ -30,12 +30,12 @@ db.shippingAddress = require("./shipping.address.model.js")(
   Sequelize,
   DataTypes
 );
-db.productCategory = require("./product.category.model")(
+db.category = require("./category.model")(
   sequelize,
   Sequelize,
   DataTypes
 );
-db.productSubCategory = require("./product.sub.category.model")(
+db.subCategory = require("./sub.category.model")(
   sequelize,
   Sequelize,
   DataTypes

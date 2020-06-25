@@ -24,8 +24,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require("./app/routes/customer.routes")(app);
 require("./app/routes/store.routes")(app);
 require("./app/routes/shipping.address.routes")(app);
-require("./app/routes/product.category.routes")(app);
-require("./app/routes/product.sub.category.routes")(app);
+require("./app/routes/category.routes")(app);
+require("./app/routes/sub.category.routes")(app);
 require("./app/routes/order.status.routes")(app);
 require("./app/routes/products.routes")(app);
 require("./app/routes/color.routes")(app);
@@ -56,7 +56,7 @@ db.sequelize.sync({ force: false }).then(() => {
   });
   
 // set port, listen for requests
-const PORT = 3000;
+const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

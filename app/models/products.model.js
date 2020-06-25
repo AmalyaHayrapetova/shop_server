@@ -1,52 +1,56 @@
-const db = require(".");
-const Stores = db.store;
-const ProductSubCategory = db.productSubCategory;
+const db = require('.')
+const Stores = db.store
+const SubCategory = db.SubCategory
 
 module.exports = (sequelize, Sequelize) => {
-  const Products = sequelize.define("Products", {
+  const Products = sequelize.define('Products', {
     id: {
       type: Sequelize.INTEGER,
-      autoIncrement:true,
-      primaryKey: true,
+      autoIncrement: true,
+      primaryKey: true
     },
 
     ProductName: {
       type: Sequelize.STRING(250),
-      unique: true,
+      unique: true
     },
     Description: {
-      type: Sequelize.STRING(250),
+      type: Sequelize.STRING(250)
     },
     Price: {
       type: Sequelize.FLOAT,
-      allowNull: false,
+      allowNull: false
     },
     isAvailable: {
       type: Sequelize.STRING(10),
-      allowNull: false,
+      allowNull: false
     },
     Quantity: {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: false
     },
     BrandName: {
       type: Sequelize.STRING(120),
-      allowNull: false,
+      allowNull: false
     },
     Discount: {
-      type: Sequelize.FLOAT,
+      type: Sequelize.FLOAT
+    },
+    MainImage: {
+      type: Sequelize.STRING(400),
+      allowNull: false
     },
     StoreID: {
       type: Sequelize.INTEGER,
       references: Stores, // <<< Note, its table's name, not object name
-      referencesKey: "id",
+      referencesKey: 'id'
     },
-    ProductSubCategoryName: {
+    SubCategoryName: {
       type: Sequelize.STRING(90),
-      references: ProductSubCategory, // <<< Note, its table's name, not object name
-      referencesKey: "SubCategoryName",
-    },
-  });
+      references: SubCategory,
+      referencesKey: 'SubCategoryName'
+    }
+  })
 
-  return Products;
-};
+  return Products
+}

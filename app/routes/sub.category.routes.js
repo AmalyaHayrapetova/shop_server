@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  const productSubCategory = require("../controllers/product.sub.category.controller");
+  const productSubCategory = require("../controllers/sub.category.controller");
 
   var router = require("express").Router();
 
@@ -8,6 +8,8 @@ module.exports = (app) => {
 
   // Create a new category
   router.post("/type", productSubCategory.createProductSubCategory);
+
+  router.get("/:id", productSubCategory.findSubCategories);
 
   app.use("/product/category", router);
 };

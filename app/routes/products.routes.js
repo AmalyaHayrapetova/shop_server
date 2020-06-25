@@ -39,8 +39,10 @@ module.exports = (app) => {
   router.get("/girls/:id", products.findGirlsProducts);
 
   //find products of gender(women,men etc), sub category and storeName
-  router.get("/find", products.filtrByGenderSubCategoryStore);
+  router.get("/find", products.filtrByGenderSubCategory);
 
+  //find products by gender
+  router.get("/gender/:id",products.filtrByGender);
 
   app.use("/product", router);
 };
