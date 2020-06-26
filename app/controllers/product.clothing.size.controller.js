@@ -17,3 +17,8 @@ exports.findAllClothingsSizes = async (req, res) => {
   const result = await services.findAll(req.body);
   return res.json(result);
 };
+
+exports.findProductSizeById = async(req, res) => {
+  const result = await services.findProductClothingSize(req.query.id);
+  return res.json(result);
+}

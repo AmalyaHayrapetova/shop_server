@@ -8,3 +8,9 @@ exports.findAllMaterials = async (req, res) => {
   const result = await services.findAll(req.body);
   res.json(result);
 };
+
+exports.findProductDetails = async(req, res) => {
+  const result = await services.findDetailByProductId(req.query.id);
+  res.json(result);
+
+}

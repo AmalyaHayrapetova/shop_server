@@ -21,7 +21,7 @@ module.exports = (app) => {
   router.post("/new", products.addProductWithColor);
 
   //find all products
-  router.get("/", products.findAll);
+  router.get("/all", products.findAll);
 
   //find products of clothings or shoes or accessorizes
   router.get("/category/:id", products.findAllProductByCurrentType);
@@ -43,6 +43,8 @@ module.exports = (app) => {
 
   //find products by gender
   router.get("/gender/:id",products.filtrByGender);
+
+  router.get("/", products.findProductWithId);
 
   app.use("/product", router);
 };

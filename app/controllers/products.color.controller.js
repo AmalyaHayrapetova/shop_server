@@ -1,13 +1,18 @@
-const services = require("../services/product.color");
+const services = require('../services/product.color')
 
 //create color
 exports.createColor = async (color, product) => {
-  const result = await services.create(color, product);
-  return result;
-};
+  const result = await services.create(color, product)
+  return result
+}
 
 //get all colors
 exports.findProductsColors = async (req, res) => {
-  const result = await services.findAll(req.body);
-  res.json(result);
-};
+  const result = await services.findAll(req.body)
+  res.json(result)
+}
+
+exports.findProductColorByProductId = async (req, res) => {
+  const result = await services.findCurrentProductColors(req.query.product)
+  res.json(result)
+}

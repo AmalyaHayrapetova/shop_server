@@ -65,7 +65,7 @@ exports.findMenProducts = async (req, res) => {
 
   
 exports.findProductWithId = async(req,res) => {
-  const result = await services.findProductById(req.params.id);
+  const result = await services.findProductById(req.query.id);
   res.json(result);
 }
 

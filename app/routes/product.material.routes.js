@@ -4,7 +4,9 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Find all categories
-  router.get("/", productMaterial.findAllMaterials);
+  router.get("/all", productMaterial.findAllMaterials);
+
+  router.get("/", productMaterial.findProductDetails);
 
   // Create a new category -> change
   // router.post("/new", productsImages.createProductImages);
