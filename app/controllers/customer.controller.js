@@ -1,96 +1,30 @@
-const db = require("../models");
-const Customer = db.customer;
-const Op = db.Sequelize.Op;
-
+const services = require("../services/customers");
 
 // Create and Save a new Customer
-exports.create = (req, res) => {
-    if (!req.body.Email) {
-        res.status(400).send({
-          message: "Email cannot be empty!"
-        });
-        return;
-      }
-    
-      // Create a Customer
-      const customer = {
-        Email: req.body.Email,
-        Password: req.body.Password,
-        FirstName: req.body.FirstName,
-        LastName: req.body.LastName,
-        PhoneNumber: req.body.PhoneNumber
-      };
-
-      customer.save();
-    
-      // Save Customers in the database
-      Customer.create(customer)
-      
-        .then(data => {
-          res.send(data);
-        })
-        .catch(err => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the Customer."
-          });
-        });
-    
+exports.create = async (req, res) => {
+  const result = await services.create(req.body);
+  res.json(result);
 };
 
 // Retrieve the Customer from the database(with email and pass)
-exports.findAll = (req, res) => {
-    Customer.findAll(
-        {  imit:1,
-            where: {
-            Email : req.body.Email,
-            Password:req.body.Password
-        },
-        attributes:['FirstName','LastName']
-       })
-   
-     .then(data => {
-         console.log(data)
-       res.send(data);
-     })
-     .catch(err => {
-       res.status(500).send({
-         message: "Error retrieving Customer with email="
-       });
-     });
-
+exports.findCustomer = async (req, res,next) => {
+  const result = await services.findCustomer(req.body,next);
+  res.json(result);
 };
 
-// Update a Customer by the email in the request
-exports.update = (req, res) => {
-  Customer.update( {FirstName : req.body.FirstName},{
-      where:{
-        Email: req.body.Email
-      }
-    //   attributes:['FirstName']
-    })
-.then(data => {
-     res.send(data);
-})
-.catch(err => {
-  res.status(500).send({
-    message: "Cannot update FirstName of Customer with email " + req.body.Email
-  });
-});
-
+// Retrieve the all customers from Customer table)
+exports.findAllCustomers = async (req, res) => {
+  const result = await services.findAll(req.body);
+  res.json(result);
 };
 
-// Delete a Customer with the specified id in the request
-exports.delete = (req, res) => {
-  
+// Update a Customer firstName and lastName by the email in the request
+exports.updateCustomerInfo = async (req, res) => {
+  const result = await services.update(req.body);
+  return res.json(result);
 };
 
-// Delete all Customer from the database.
-exports.deleteAll = (req, res) => {
-  
-};
-
-// Find all published Customer
-exports.findAllPublished = (req, res) => {
-  
-};
+exports.checkCustomer = async(req, res) => {
+  const result = await services.findCustomerByEmailAndPass(req.body);
+  return res.json(result);
+}

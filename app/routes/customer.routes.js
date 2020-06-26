@@ -1,22 +1,21 @@
-module.exports = app => {
-    const customer = require("../controllers/customer.controller.js");
-  
-    var router = require("express").Router();
-  
-    // Create a new Customer
-    router.post("/signup", customer.create);
+module.exports = (app) => {
+  const customer = require("../controllers/customer.controller.js");
 
-    // LogIn a  Customer
-    router.get("/signin", customer.findAll);
+  var router = require("express").Router();
 
+  // Find all customers
+  router.get("/", customer.findAllCustomers);
 
-     // Update FirstName
-    router.put("/account/name", customer.update);
+  // Create a new Customer
+  router.post("/sign-up", customer.create);
 
-    // Retrieve all Customer
-    // router.get("/:email", customer.findOne);
+  // LogIn as a Customer
+  router.get("/sign-in", customer.findCustomer);
 
-    app.use('/customer', router);
+  // Update FirstName
+  router.put("/account/info", customer.updateCustomerInfo);
 
+  router.get("/auth", customer.checkCustomer);
 
-}
+  app.use("/customer", router);
+};
