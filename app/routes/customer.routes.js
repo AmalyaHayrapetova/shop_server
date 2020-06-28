@@ -10,7 +10,7 @@ module.exports = (app) => {
   router.post("/sign-up", customer.create);
 
   // LogIn as a Customer
-  router.get("/sign-in", customer.findCustomer);
+  router.post("/sign-in", customer.findCustomer);
 
   // Update FirstName
   router.put("/account/info", customer.updateCustomerInfo);

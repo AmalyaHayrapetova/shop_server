@@ -58,7 +58,7 @@ exports.findMenProducts = async (req, res) => {
   };
   exports.filtrByGenderSubCategory = async(req,res) => {
       const result = await services.findProductsByGenderAndSubCategory(
-        req.query.subcategory, req.query.gender
+        req.query.subcategory, req.query.gender,req.query.store
       );
       res.json(result)
   }

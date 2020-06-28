@@ -4,6 +4,7 @@ const cors = require("cors");
 const db = require("./app/models");
 const asyncHandler = require('express-async-handler')
 const { handleError } = require("./app/errors/error")
+const path = require('path');
 
 const app = express();
 
@@ -54,7 +55,8 @@ db.sequelize.sync({ force: false }).then(() => {
     next(error);
   
   });
-  
+  app.use(express.static(path.join(__dirname, 'build')));
+
 // set port, listen for requests
 const PORT = 8080;
 app.listen(PORT, () => {

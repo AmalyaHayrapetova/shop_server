@@ -9,5 +9,5 @@ module.exports = (app) => {
   // Create a new category
   router.post("/new", productCategory.createProductCategory);
 
-  app.use("/product/category", router);
+  app.use("/category", router);
 };
