@@ -9,7 +9,7 @@ module.exports = (app) => {
   // Create a new category
   router.post("/type", productSubCategory.createProductSubCategory);
 
-  router.get("/:id", productSubCategory.findSubCategories);
+  router.get("/", productSubCategory.findSubCategories);
 
-  app.use("/product/category", router);
+  app.use("/subcategory", router);
 };

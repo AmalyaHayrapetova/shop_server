@@ -1,9 +1,18 @@
 const db = require("../models");
 const Orders = db.orders;
 const { QueryTypes } = require("sequelize");
+const validator = require('validator');
 
 exports.createOrder = async (orders) => {
   orders[OrderStatusName] = "In Progress";
+      const errors = [];
+    if(validator.isEmpty(orders.billing_first_name)) {
+        errors.push({
+            param: 'billing_first_name',
+            msg: 'Required field.'
+        });
+    }
+
   return Orders.create(orders);
 };
 

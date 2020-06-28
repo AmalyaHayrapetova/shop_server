@@ -16,7 +16,7 @@ module.exports = app => {
   var router = require('express').Router(options)
 
   // get all
-  //router.get('/', productColor.findProductsColors)
+  router.get('/all', productColor.findProductsColors)
 
   router.get('/', productColor.findProductColorByProductId)
 

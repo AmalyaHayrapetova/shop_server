@@ -18,6 +18,6 @@ module.exports.findCategoryBySubCategory = async (subCategoryName) => {
 };
 
 module.exports.findSubCategories = async(req,res) =>{
-  const result = await services.findSubCategoryByCategory(req.params.id);
+  const result = await services.findSubCategoryByCategory(req.query.category);
   res.json(result);
 }
