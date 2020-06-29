@@ -26,5 +26,5 @@ module.exports = (app) => {
 
   //fixme add update shippin address
 
-  app.use("/shippingaddress", router);
+  app.use("/shipping-address", router);
 };

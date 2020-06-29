@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Node.js Rest Apis with Express, Sequelize & MySQL",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "nodejs",
     "express",
@@ -19,8 +16,12 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "express-validator": "^6.6.0",
     "mysql2": "^2.0.2",
-    "sequelize": "^5.21.2"
+    "sequelize": "^5.22.2",
+    "swagger-ui-express": "^4.0.2"
   }
 }

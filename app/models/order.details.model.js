@@ -1,7 +1,7 @@
 const db = require("../models");
 const Customer = db.customer;
 const Products = db.products;
-
+const Orders = db.orders
 module.exports = (sequelize, Sequelize) => {
   const OderDetails = sequelize.define("OrderDetails", {
 
@@ -39,11 +39,13 @@ module.exports = (sequelize, Sequelize) => {
       references: Products, // <<< Note, its table's name, not object name
       referencesKey: "id",
     },
-    CustomerID: {
+    OrderID: {
       type: Sequelize.INTEGER,
-      references: Customer, // <<< Note, its table's name, not object name
+      references: Orders, // <<< Note, its table's name, not object name
       referencesKey: "id",
-    },
+
+    }
+
   });
   return OderDetails;
 };
