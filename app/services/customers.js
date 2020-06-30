@@ -3,15 +3,15 @@ const Customer = db.customer
 const { ErrorHandler } = require('../errors/error')
 const { QueryTypes } = require('sequelize')
 const { check, validationResult } = require('express-validator/check')
+const bcrypt = require('bcrypt')
 
 exports.create = async customer => {
   // Create a Customer
-
-  // Save Customers in the database
   const result = await checkValidation(customer)
   if (result === 1) {
     return new ErrorHandler(404, 'User with the specified email exists')
   }
+  customer['Password'] = await bcrypt.hash(customer.Password, 10)
   return Customer.create(customer)
 }
 
@@ -35,27 +35,27 @@ exports.findCustomer = async (customer, next) => {
     const { Email, Password, id } = customer
     if (!Email || !Password) {
       return new ErrorHandler(404, 'Missing required email and password fields')
-    } else {
-      const user = await sequelize.query(
-        'Select id,Count(id) as count From Customers ' +
-          'WHERE Email =:Email AND Password =:Password',
-        {
-          replacements: {
-            Email: Email,
-            Password: Password
-          },
-          type: QueryTypes.SELECT
-        }
-      )
-      if (user[0].count === 0) {
-        return new ErrorHandler(
-          404,
-          'User with the specified email does not exists'
-        )
-      } else {
-        return user[0].id
-      }
     }
+    const user = await sequelize.query(
+      'Select id, Password, Count(id) as count From Customers ' +
+        'WHERE Email =:Email',
+      {
+        replacements: {
+          Email: Email
+        },
+        type: QueryTypes.SELECT
+      }
+    )
+    console.log('user ', user)
+    if (user[0].count === 0) {
+      return new ErrorHandler(
+        404,
+        'User with the specified email does not exists'
+      )
+    } else if (!(await bcrypt.compare(Password, user[0].Password))) {
+      return new ErrorHandler(404, 'Password is wrong')
+    }
+    return user[0].id
   } catch (error) {
     next(error)
   }

@@ -16,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
       unique: true,
     },
     Password: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(120),
       validate: {
         is: /(?=.*[A-Z])(?=.*[a-z])(?=.{8,})(?=.{8,})/i,
       },
