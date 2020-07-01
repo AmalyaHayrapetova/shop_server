@@ -37,7 +37,7 @@ exports.findCustomer = async (customer, next) => {
       return new ErrorHandler(404, 'Missing required email and password fields')
     }
     const user = await sequelize.query(
-      'Select id, Password, Count(id) as count From Customers ' +
+      'Select  id,Email,Password, Count(id) as count From Customers ' +
         'WHERE Email =:Email',
       {
         replacements: {
@@ -55,7 +55,7 @@ exports.findCustomer = async (customer, next) => {
     } else if (!(await bcrypt.compare(Password, user[0].Password))) {
       return new ErrorHandler(404, 'Password is wrong')
     }
-    return user[0].id
+    return user
   } catch (error) {
     next(error)
   }

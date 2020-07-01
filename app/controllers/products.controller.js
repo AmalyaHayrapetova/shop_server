@@ -74,3 +74,9 @@ exports.filtrByGender = async(req,res) => {
   res.json(result);
 
 }
+
+exports.findProductIdWithName = async(req) => {
+  const result = await services.findProductByName(req);
+  return result[0].id;
+
+}

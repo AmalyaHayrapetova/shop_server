@@ -19,8 +19,11 @@ module.exports = (app) => {
     // router.get("/", orderDetails.findAllAvailableColors);
   
     // Create a new order status
-    router.post("/", orderDetails.createOrderDetail);
+    router.post("/new", orderDetails.createOrderDetail);
+
+    //get order details by order id
+    router.get("/customer/details/", orderDetails.findCustomerAllOrderDetailsByOrderNumber)
   
-    app.use("/add-bag", router);
+    app.use("/order-details", router);
   };
   

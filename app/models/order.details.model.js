@@ -1,51 +1,47 @@
-const db = require("../models");
-const Customer = db.customer;
-const Products = db.products;
+const db = require('../models')
+const Customer = db.customer
+const Products = db.products
 const Orders = db.orders
+
 module.exports = (sequelize, Sequelize) => {
-  const OderDetails = sequelize.define("OrderDetails", {
-
-    id: {
+  const OderDetails = sequelize.define('OrderDetails', {
+    OrderDetailsId: {
       type: Sequelize.INTEGER,
-      primaryKey : true,
+      primaryKey: true,
+      autoIncrement: true
+    },
 
-    },
-    PriceEach: {
-      type: Sequelize.FLOAT,
-      allowNull: false,
-    },
-    ProductColor: {
-      type: Sequelize.STRING(90),
-      allowNull: false,
-    },
-    // ProductMainImage: {
-    //   type: Sequelize.STRING(250),
-    //   allowNull: false,
-    // },
-    Quantity: {
+    OrderNumber: {
       type: Sequelize.INTEGER,
-      default: 1,
-    },
-    ProductSize: {
-      type: Sequelize.STRING(90),
-      allowNull: false,
-    },
-    StoreName: {
-      type: Sequelize.STRING(90),
-      allowNull: false,
+      references: Orders, // <<< Note, its table's name, not object name
+      referencesKey: 'id'
     },
     ProductID: {
       type: Sequelize.INTEGER,
       references: Products, // <<< Note, its table's name, not object name
-      referencesKey: "id",
+      referencesKey: 'id'
     },
-    OrderID: {
+    ProductColor: {
+      type: Sequelize.STRING(90),
+      allowNull: false
+    },
+    ProductSize: {
+      type: Sequelize.STRING(90),
+      allowNull: false
+    },
+    Quantity: {
       type: Sequelize.INTEGER,
-      references: Orders, // <<< Note, its table's name, not object name
-      referencesKey: "id",
+      default: 1
+    },
 
+    Price: {
+      type: Sequelize.FLOAT,
+      allowNull: false
+    },
+    StoreName: {
+      type: Sequelize.STRING(90),
+      allowNull: false
     }
-
-  });
-  return OderDetails;
-};
+  })
+  return OderDetails
+}

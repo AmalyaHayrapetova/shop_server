@@ -19,7 +19,10 @@ exports.create = async products => {
   products['StoreID'] = storeID
   var product = await Products.create(products)
   await ProductGender.createProductGender(genderID, product.id)
+  if(categoryName[0].CategoryName !== "Accessories"){
   await createSizes(categoryName[0].CategoryName, products.Sizes, product.id)
+
+  }
   await addProductAttributes(products.Attributes, product.id)
   await addProductMaterials(products.MaterialType, product.id)
 
@@ -51,6 +54,18 @@ exports.findProductById = async productID => {
   )
   return product
 }
+
+exports.findProductByName = async name => {
+  const product = await sequelize.query(
+    'SELECT id FROM `Products` WHERE ProductName =:ProductName',
+    {
+      replacements: { ProductName: name },
+      type: QueryTypes.SELECT
+    }
+  )
+  return product
+}
+
 exports.findProductsOfCategory = async productCategoryName => {
   const products = await sequelize.query(
     'SELECT `*` FROM `Products` `p` LEFT JOIN ' +

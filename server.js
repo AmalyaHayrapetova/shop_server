@@ -28,6 +28,8 @@ require("./app/routes/shipping.address.routes")(app);
 require("./app/routes/category.routes")(app);
 require("./app/routes/sub.category.routes")(app);
 require("./app/routes/order.status.routes")(app);
+require("./app/routes/order.routes")(app);
+require("./app/routes/order.details.routes")(app);
 require("./app/routes/products.routes")(app);
 require("./app/routes/color.routes")(app);
 require("./app/routes/product.color.routes")(app);

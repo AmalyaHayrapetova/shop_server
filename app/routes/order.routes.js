@@ -17,7 +17,7 @@ module.exports = (app) => {
   
   
     // Create a new order 
-    router.post("/", orders.createOrder);
+    router.post("/new", orders.createNewOrder);
 
     //find customer orders
     router.get("/:id", orders.findCustomerOrders)

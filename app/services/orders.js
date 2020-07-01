@@ -4,17 +4,10 @@ const { QueryTypes } = require("sequelize");
 const validator = require('validator');
 
 exports.createOrder = async (orders) => {
-  orders[OrderStatusName] = "In Progress";
-      const errors = [];
-    if(validator.isEmpty(orders.billing_first_name)) {
-        errors.push({
-            param: 'billing_first_name',
-            msg: 'Required field.'
-        });
-    }
 
   return Orders.create(orders);
 };
+
 
 exports.findCustomerOrder = async (customerID) => {
   const customerOrder = await sequelize.query(
@@ -27,6 +20,19 @@ exports.findCustomerOrder = async (customerID) => {
 
   return customerOrder;
 };
+
+exports.findCustomerOrderNum = async (customerID) => {
+  const orderNumber = await sequelize.query(
+    'SELECT OrderNumber from Orders where CustomerID=:CustomerID Order By UNIX_TIMESTAMP (OrderDate) desc',
+    {
+      replacements: {
+        CustomerID: customerID
+      },
+      type: QueryTypes.SELECT
+    }
+  )
+  return orderNumber
+}
 
 exports.findCustomerOrderStatus = async (customerID, orderID) => {
   const customerOrder = await sequelize.query(

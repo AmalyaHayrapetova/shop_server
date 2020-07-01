@@ -2,20 +2,19 @@ const db = require('../models')
 const Customer = db.customer
 const Status = db.orderStatus
 
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, Sequelize, DataTypes) => {
   const Orders = sequelize.define('Orders', {
-    OrderID: {
+    OrderNumber: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     OrderDate: {
-      type: Sequelize.DATE,
-      allowNull: false
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
     },
     ShippedDate: {
-      type: Sequelize.DATE
-      // allowNull: false,
+      type: DataTypes.DATE
     },
 
     Country: {
@@ -45,13 +44,15 @@ module.exports = (sequelize, Sequelize) => {
     CustomerID: {
       type: Sequelize.INTEGER,
       references: Customer, // <<< Note, its table's name, not object name
-      referencesKey: 'id'
+      referencesKey: 'id',
+      allowNull: false
     },
     OrderStatusName: {
-      type: Sequelize.String,
+      type: Sequelize.STRING(70),
       references: Status,
       referencesKey: 'StatusName',
-      default: "In Progress"
+      defaultValue: 'In Progress',
+      allowNull: false
     }
   })
   return Orders
