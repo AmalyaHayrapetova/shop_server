@@ -23,11 +23,12 @@ module.exports = (sequelize, Sequelize) => {
     },
     ProductColor: {
       type: Sequelize.STRING(90),
-      allowNull: false
+      allowNull: true
     },
     ProductSize: {
       type: Sequelize.STRING(90),
-      allowNull: false
+      allowNull: true,
+      defaultValue:"No Size"
     },
     Quantity: {
       type: Sequelize.INTEGER,

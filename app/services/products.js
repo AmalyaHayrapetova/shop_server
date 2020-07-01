@@ -151,6 +151,7 @@ const findProductsByGenderStoreSubCategory = async (
 }
 
 const findProductByStoreSubCategory = async (store, subcategory) => {
+
   const products = await sequelize.query(
     'Select * From Products p ' +
       'WHERE  p.SubCategoryName =:ProductSubCategoryName and p.StoreID =(SELECT id from Stores where StoreName =:StoreName)',
